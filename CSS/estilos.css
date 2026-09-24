@@ -18,7 +18,7 @@ body {
 /* ---fundo -- */
 .fundo {
     background-color: #79a6cc;
-    background-image: url("../ASSETS/textura.PNG");
+    background-image: url("../ASSETS/textura.png");
     background-blend-mode:multiply;
     background-size: cover;
     background-repeat: repeat;
@@ -44,7 +44,7 @@ body {
 
 .paginaInicial {
     background-color: #79a6cc;
-    background-image: url("../ASSETS/textura.PNG");
+    background-image: url("../ASSETS/textura.png");
     background-blend-mode:multiply;
     background-size: cover;
     background-repeat: repeat;
