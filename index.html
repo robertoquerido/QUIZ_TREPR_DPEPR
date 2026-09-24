@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400..800&family=Teko:wght@300..700&display=swap" rel="stylesheet">
+
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="./CSS/estilos.css">
+
+    <title>Quiz</title>
+</head>
+
+
+<body>
+
+	<div class="fundo "></div>
+
+	<div class="paginaInicial ">
+
+			<button type="button" class="botaoSaibaMais">
+                <img class="iconeMenuSaibaMais" src="./ASSETS/menu_sand2.png" alt="" aria-hidden="true">
+                <span class="rotuloSaibaMais">POR QUE JOGAR?</span>
+            </button>
+			<div class="botaoFecharSaibaMais visivel"></div>
+
+			<div class="lateralPicotada">
+				<div class="blocoTextoLateral visivel">
+                    <div class="conteudoMenuLateral">
+					<div class="tituloSaibaMais">Colinha, fake news, cidadania, voto majoritário e cotas.</div>
+					<div class="textoSaibaMais">
+                        Vamos ver o quanto você, que votará pela primeira vez, está familiarizado com esses assuntos?
+                        <br><br>
+                        A Defensoria Pública do Estado do Paraná e o Tribunal Regional Eleitoral do Paraná divulgam esse material totalmente interativo, um quiz, com perguntas que vão testar seu conhecimento nas eleições.
+                        <br><br>
+                        <b>Votar consciente é votar sabendo seus direitos e como funciona o momento mais importante da nossa política e da nossa democracia.</b>
+                    </div>
+                    </div>
+					
+				</div>
+			</div>
+
+			<div class="logoEleicoes2026"></div>
+
+			<div class="textoInicial">
+                <p class="perguntaCapa">Será que você está<br>por dentro da eleição?</p>
+                <h1 class="chamadaCapa"><span>Faça o teste</span><span>e descubra</span></h1>
+			</div>
+
+			<div class="botoes">
+					<button type="button" class="botaoIniciar tekoBotaoIniciar">Bora!</button>
+			</div>
+
+        <div class="logosInstitucionais"><img src="./ASSETS/logo-TREPR-DPRPR.png" alt="Tribunal Regional Eleitoral do Paraná e Defensoria Pública do Estado do Paraná"></div>
+    </div>
+
+
+    <div class="telaQuiz visivel">
+
+
+        <div class="cabecalho textoCabecalho"> Eleições 2026
+            <div class="botaoFecharQuiz"></div>
+        </div>
+
+        <div class="enunciado tekoTextoQuiz">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam ullamcorper??</div>
+
+        <div class="alternativas">
+            <button type="button" class="botaoAlt alternativa01">Alternativa não selecionada</button>
+            <button type="button" class="botaoAlt alternativa02">Alternativa correta</button>
+            <button type="button" class="botaoAlt alternativa03">Alternativa errada</button>
+            <button type="button" class="botaoAlt alternativa04">Alternativa selecionada</button>
+        </div>
+
+        <div class="progressao">
+            <div class="barraProgressao"></div>
+        </div>
+
+        
+
+    </div>
+
+    <div class="bottomPicotado"></div>
+
+    <section class="telaResultado visivel" aria-labelledby="tituloResultado">
+        <button type="button" class="fecharResultado" aria-label="Fechar resultado e voltar ao início">×</button>
+        <div class="resumoResultado">
+            <div>
+                <h1 id="tituloResultado" tabindex="-1"><span>Parabéns!</span><span>Você finalizou</span><span>o Quiz e acertou:</span></h1>
+                <p class="pontuacaoResultado"></p>
+            </div>
+        </div>
+        <div class="informacoesResultado">
+            <div>
+                <p>Se você quer saber mais sobre esses temas, acesse a cartilha Jovem Eleitor completa, baixe e compartilhe.</p>
+                <p>Quanto mais gente tiver acesso à informação, melhor serão nossas eleições e nossa política!</p>
+                <!-- LINK PROVISÓRIO DA CARTILHA: substitua o href abaixo quando o PDF for publicado. -->
+                <a class="linkCartilha" href="http://defensoriapublica.pr.def.br/cartilha-jovem-eleitor.pdf" target="_blank" rel="noopener noreferrer">Clique aqui!</a>
+                <p class="grupoResultado">Para acompanhar tudo sobre seus direitos, siga as redes sociais da Defensoria Pública:</p>
+                <a href="https://www.instagram.com/defensoriapublicapr/" target="_blank" rel="noopener noreferrer" aria-label="Instagram da Defensoria Pública do Paraná">Instagram</a>
+                <p class="grupoResultado">E não deixe de seguir também o Tribunal Regional Eleitoral:</p>
+                <a href="https://www.instagram.com/treparana/" target="_blank" rel="noopener noreferrer" aria-label="Instagram do Tribunal Regional Eleitoral do Paraná">Instagram</a>
+            </div>
+        </div>
+    </section>
+
+    <dialog class="modalExplicacao" aria-labelledby="tituloExplicacao" aria-describedby="textoExplicacao">
+        <h2 id="tituloExplicacao">Entenda a resposta</h2>
+        <div id="textoExplicacao" class="textoExplicacao"></div>
+        <button type="button" class="botaoOkExplicacao" autofocus>OK</button>
+    </dialog>
+
+
+</body>
+
+<script src="./js/script.js"> </script>
+<script src="./js/perguntas_quiz.js"> </script>
+<script src="./js/script_quiz.js"> </script>
+
+
+
+</html>
