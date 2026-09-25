@@ -86,6 +86,102 @@ document.fonts.addEventListener("loadingdone", agendarAjusteQuiz);
 window.visualViewport?.addEventListener("resize", agendarAjusteQuiz);
 
 
+
+//-------------------------------------------------------------//
+// GOOGLE ANALYTICS 4 - MEDIÇÃO DO QUIZ
+//-------------------------------------------------------------//
+
+let analyticsQuizAtivo = false;
+let inicioQuizAnalytics = null;
+
+// Evita erro caso o GA4 ainda não tenha carregado ou esteja bloqueado.
+function enviarEventoGA4(nomeEvento, parametros) {
+    if (typeof gtag !== "function") return;
+
+    gtag("event", nomeEvento, parametros || {});
+}
+
+// Retorna um identificador fixo da pergunta com base na ordem
+// em perguntas_quiz.js. A exibição pode continuar aleatória.
+function idPerguntaAnalytics(pergunta) {
+    return perguntas.indexOf(pergunta) + 1;
+}
+
+// Deve ser chamada somente quando a pessoa clicar em "Bora!".
+function iniciarAnalyticsQuiz() {
+    analyticsQuizAtivo = true;
+    inicioQuizAnalytics = Date.now();
+
+    enviarEventoGA4("quiz_iniciado", {
+        total_perguntas: perguntas.length
+    });
+}
+
+function registrarPerguntaExibidaAnalytics() {
+    if (!analyticsQuizAtivo || !perguntaAtual) return;
+
+    enviarEventoGA4("quiz_pergunta_exibida", {
+        etapa: respondidas + 1,
+        pergunta_id: idPerguntaAnalytics(perguntaAtual),
+        total_perguntas: perguntas.length
+    });
+}
+
+function registrarRespostaAnalytics(resposta) {
+    if (!analyticsQuizAtivo || !perguntaAtual) return;
+
+    enviarEventoGA4("quiz_resposta", {
+        etapa: respondidas,
+        pergunta_id: idPerguntaAnalytics(perguntaAtual),
+        resultado: resposta.correta === true ? "correta" : "errada",
+        acertos_ate_agora: acertos,
+        total_perguntas: perguntas.length
+    });
+}
+
+function registrarConclusaoAnalytics() {
+    if (!analyticsQuizAtivo) return;
+
+    let tempoSegundos = null;
+
+    if (inicioQuizAnalytics !== null) {
+        tempoSegundos = Math.round((Date.now() - inicioQuizAnalytics) / 1000);
+    }
+
+    enviarEventoGA4("quiz_concluido", {
+        perguntas_respondidas: respondidas,
+        acertos: acertos,
+        erros: respondidas - acertos,
+        tempo_segundos: tempoSegundos,
+        total_perguntas: perguntas.length
+    });
+
+    analyticsQuizAtivo = false;
+    inicioQuizAnalytics = null;
+}
+
+function registrarAbandonoAnalytics() {
+    if (!analyticsQuizAtivo) return;
+
+    let tempoSegundos = null;
+
+    if (inicioQuizAnalytics !== null) {
+        tempoSegundos = Math.round((Date.now() - inicioQuizAnalytics) / 1000);
+    }
+
+    enviarEventoGA4("quiz_abandonado", {
+        perguntas_respondidas: respondidas,
+        proxima_etapa: Math.min(respondidas + 1, perguntas.length),
+        acertos_ate_agora: acertos,
+        tempo_segundos: tempoSegundos,
+        total_perguntas: perguntas.length
+    });
+
+    analyticsQuizAtivo = false;
+    inicioQuizAnalytics = null;
+}
+
+
 //-------------------------------------------------------------//
 // VARIÁVEIS DO QUIZ
 //-------------------------------------------------------------//
@@ -291,6 +387,8 @@ function mostrarPergunta() {
             responder(this.resposta, this);
         };
     }
+
+    registrarPerguntaExibidaAnalytics();
 }
 
 
@@ -319,6 +417,8 @@ function responder(resposta, botaoClicado) {
         botaoClicado.classList.add("errada");
     }
 
+    registrarRespostaAnalytics(resposta);
+
     temporizadorExplicacao = setTimeout(function() {
         const correta = Array.from(alternativas).find(alternativa => alternativa.resposta.correta);
         const posicaoAnterior = correta.getBoundingClientRect().top;
@@ -339,7 +439,7 @@ function responder(resposta, botaoClicado) {
             modalExplicacao.showModal();
             ajustarTextosQuiz();
         }, duracao);
-    }, 600);
+    }, 1400);
 
 
 }
@@ -359,6 +459,7 @@ function progresso() {
 //-------------------------------------------------------------//
 
 function finalizarQuiz() {
+    registrarConclusaoAnalytics();
     perguntaAtual = null;
     document.querySelector(".pontuacaoResultado").textContent =
         acertos + (acertos === 1 ? " questão de " : " questões de ") + perguntas.length;

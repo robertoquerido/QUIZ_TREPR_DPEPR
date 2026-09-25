@@ -937,3 +937,8 @@ body:has(.telaQuiz:not(.visivel)) .bottomPicotado {
 }
 .paginaInicial .botaoIniciar:active { transform: translateY(0.5dvh); box-shadow: 0 0.4dvh 0 #123aba; }
 .paginaInicial .rotuloSaibaMais { font-family: "Teko Capa", "Teko", sans-serif; font-weight: 700; }
+
+.textoExplicacao p {
+    text-indent: 1.2em;
+    margin: 0;
+}

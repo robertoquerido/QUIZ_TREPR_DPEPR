@@ -40,6 +40,7 @@ botaoFecharSaibaMais.addEventListener("click", function() {
 
 // BOTAO INICIAR QUIZ
 botaoIniciar.addEventListener("click", function() {
+    iniciarAnalyticsQuiz();
     iniciarQuiz();
 
     botaoIniciar.classList.add("visivel");
@@ -58,6 +59,7 @@ botaoIniciar.addEventListener("click", function() {
 
 // FECHAR QUIZ SEM TERMINAR
 botaoFecharQuiz.addEventListener("click", function() {
+    registrarAbandonoAnalytics();
     cancelarExplicacao();
 
     botaoIniciar.classList.remove("visivel");
@@ -81,12 +83,9 @@ botaoFecharQuiz.addEventListener("click", function() {
 
 
 
-
-    
 });
 //-------------------------------------------------------------//
 
 
-//-------------------------------------------------------------//
 
 
